@@ -2,12 +2,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Shield, Star, Users, Award } from 'lucide-react'
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 32 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, delay },
-})
-
 const fadeUpView = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
@@ -55,7 +49,7 @@ export default function Home() {
   return (
     <div>
       {/* ── Hero ── */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen min-h-[600px] flex items-end justify-center overflow-hidden">
         {/* Video background */}
         <video
           className="absolute inset-0 w-full h-full object-cover"
@@ -67,57 +61,30 @@ export default function Home() {
           <source src="/hero.mp4" type="video/mp4" />
         </video>
 
-        {/* Overlay — lighter at top to let the glow shine, darker at bottom for text */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/25 to-black/65" />
+        {/* Overlay — barely touches the top, heavy only at the very bottom for buttons */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/70" />
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-          <motion.p
-            {...fadeUp(0.2)}
-            className="text-gold text-[11px] tracking-[4px] uppercase mb-6"
-          >
-            Стоматологическая клиника
-          </motion.p>
-
-          <motion.h1
-            {...fadeUp(0.4)}
-            className="font-serif text-white mb-6"
-            style={{ fontSize: 'clamp(48px, 7vw, 96px)', lineHeight: 1.05, fontWeight: 300 }}
-          >
-            Miron{' '}
-            <em className="italic text-gold/90">Dentistry</em>
-          </motion.h1>
-
-          <motion.p
-            {...fadeUp(0.6)}
-            className="text-white/70 text-lg leading-relaxed mb-10 font-light"
-          >
-            Современное оборудование. Передовые методики.<br />
-            Ваша улыбка — наше искусство.
-          </motion.p>
-
-          <motion.div {...fadeUp(0.8)} className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/booking"
-              className="px-8 py-4 bg-gold text-white text-[12px] tracking-[2px] uppercase hover:bg-gold-dark transition-colors duration-300"
-            >
-              Записаться на приём
-            </Link>
-            <Link
-              to="/services"
-              className="px-8 py-4 border border-white/50 text-white text-[12px] tracking-[2px] uppercase hover:border-white hover:bg-white/10 transition-all duration-300 flex items-center gap-2"
-            >
-              Наши услуги <ArrowRight size={14} />
-            </Link>
-          </motion.div>
-        </div>
+        {/* CTA buttons — bottom center, cinematic */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="relative z-10 flex flex-col sm:flex-row items-center gap-4 pb-24 px-6"
+        >
+          <Link to="/booking" className="btn-gold inline-block">
+            Записаться на приём
+          </Link>
+          <Link to="/services" className="btn-glass inline-flex items-center gap-3">
+            Наши услуги <ArrowRight size={13} />
+          </Link>
+        </motion.div>
 
         {/* Scroll hint */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          transition={{ delay: 1.6, duration: 1 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
           <span className="text-white/40 text-[10px] tracking-[3px] uppercase">Прокрутите</span>
           <motion.div
